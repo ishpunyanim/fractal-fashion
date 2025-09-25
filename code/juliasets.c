@@ -1,22 +1,25 @@
 #include <stdio.h>
-#include <sdl.h>
+#include <SDL.h>
 #include <math.h>
 #include <stdlib.h>
 
 #define WIDTH 900
 #define HEIGHT 600
 #define ESCAPE_RADIUS 2.0
-#define ZOOM 200.0
-#define MAX_ITERATION 500
+#define MAX_ITERATION 512
 
 typedef struct complex_number {
     double real;
     double imag;
 } cxn;
 
+double zoom = 200.0;
+double centerx = 0.0, centery = 0.0;
 int global_running = 1;
 int isDown = 0;
-cxn c = {-0.54, 0.54};
+cxn c = { -0.835, -0.2321 };
+Uint32 button;
+int mx, my;
 
 
 Uint32
@@ -58,25 +61,25 @@ check_boundedness(cxn z) {
 }
 
 void
-draw_fractal(SDL_Surface *pSurface) {
+draw_fractal(SDL_Surface *pSurface, SDL_Window *pWindow) {
     for (int x = 0; x < WIDTH; x++) {
         for (int y = 0; y < HEIGHT; y++) {
             cxn z;
-            z.real = ((double)x - (double)WIDTH / 2.0) / ZOOM;
-            z.imag = -((double)y - (double)HEIGHT / 2.0) / ZOOM;
+            z.real = ((double)x - (double)WIDTH / 2.0) / zoom + centerx;
+            z.imag = -((double)y - (double)HEIGHT / 2.0) / zoom + centery;
 
             double hue = check_boundedness(z);
             SDL_Rect pixel = (SDL_Rect){ x, y, 1, 1 };
             
             // For more colors, saturation can be set as a function of hue: (hue / 360.0)
             Uint32 color = color_space_conv(pSurface, hue, 0.85, 0.5);
-            SDL_FillRect(pSurface, &pixel, color);  // No blending
+            SDL_FillRect(pSurface, &pixel, color);
         }
     }
 }
 
 int
-main(int argc, char* argv[]) {
+main() {
     printf("Hello Humans!");
 
     SDL_Init(SDL_INIT_VIDEO);
@@ -91,11 +94,29 @@ main(int argc, char* argv[]) {
             else if (event.type == SDL_KEYDOWN) {
                 if (event.key.keysym.sym == SDLK_ESCAPE) global_running = 0;
             }
-            else if (event.type == SDL_MOUSEBUTTONDOWN) isDown = 1;
+            else if (event.type == SDL_MOUSEBUTTONDOWN) {
+                isDown = 1;
+                button = event.button.button;
+
+                if (button == SDL_BUTTON_RIGHT) {
+                    // Get mouse position
+                    SDL_GetMouseState(&mx, &my);
+
+                    // Convert clicked pixel to complex plane coords
+                    double clickedx = ((double)mx - (WIDTH / 2.0)) / zoom + centerx;
+                    double clickedy = -((double)my - (HEIGHT / 2.0)) / zoom + centery;
+
+                    // Set new center at clicked point
+                    centerx = clickedx;
+                    centery = clickedy;
+
+                    // Increase zoom
+                    zoom *= 1.5;  // adjust factor as you like
+                }
+            }
             else if (event.type == SDL_MOUSEBUTTONUP) isDown = 0;
             else if (event.type == SDL_MOUSEMOTION) {
                 if (isDown) {
-                    int mx, my;
                     SDL_GetMouseState(&mx, &my);
                     
                     c.real = ((double)mx - WIDTH / 2.0) / (WIDTH / 4.0);
@@ -106,7 +127,7 @@ main(int argc, char* argv[]) {
 
         // time += 0.01;
 
-        draw_fractal(pSurface);
+        draw_fractal(pSurface, pWindow);
         SDL_UpdateWindowSurface(pWindow);
         // SDL_Delay(25);
     }
