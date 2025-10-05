@@ -3,7 +3,8 @@
 ### Overview
 
 **Fractal Fashion** is a simple exploration of fractal geometry, implemented from scratch in **C** using the **SDL2** library for visualization.
-This renderer procedurally generates complex fractals by iteratively evaluating `z(n+1) = z(n)^2 + c` over a discretized complex plane, where each pixel maps to a unique complex coordinate. The escape-time algorithm determines divergence `(|z| > 2)` to produce self-similar, topologically rich structures, while iteration counts are converted via a custom HSL -> RGB pipeline in C to yield smooth, vivid gradients enhancing perceptual detail. 
+
+This renderer procedurally generates complex fractals by iteratively evaluating **`z(n+1) = z(n)^2 + c`** over a discretized complex plane, where each pixel maps to a unique complex coordinate. The escape-time algorithm determines divergence **`(|z| > 2)`** to produce self-similar, topologically rich structures, while iteration counts are converted via a custom **HSL -> RGB** pipeline in C to yield smooth, vivid gradients enhancing perceptual detail. 
 
 The goal of this project was to learn:
 
