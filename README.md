@@ -13,6 +13,13 @@ The goal of this project was to learn:
 
 ---
 
+## 📸 Demo
+
+![Fractal Demo](image23.png)
+More stunning visuals with mouse interactions: https://m16.neocities.org/fractal-fashion#!
+
+---
+
 ### Features
 
 * **Pure C implementation** (no external math or graphics engines).
