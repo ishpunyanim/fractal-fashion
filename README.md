@@ -63,5 +63,3 @@ This project helped me understand:
 * Port to Vulkan or DirectX for GPU-based fractal exploration.
 
 ---
-
-Would you like me to make a **matching GitHub description + tags section** (short one-liner and keywords for the repo metadata)? It helps your project get picked up by recruiters searching terms like *C, graphics, renderer, fractal, performance*.
