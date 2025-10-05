@@ -14,10 +14,10 @@ The goal of this project was to learn:
 
 ---
 
-## 📸 Demo
+## Demo
 
 ![Fractal Demo](image23.png)
-More stunning visuals with mouse interactions: https://m16.neocities.org/fractal-fashion#!
+More stunning visuals with mouse interactions on my website: https://m16.neocities.org/fractal-fashion
 
 ---
 
