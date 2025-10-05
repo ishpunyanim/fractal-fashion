@@ -1,9 +1,9 @@
-# fractal-fashion - Julia Set Renderer in C
+# fractal-fashion - Julia Set Renderer in C + SDL2
 
 ### Overview
 
 **Fractal Fashion** is a simple exploration of fractal geometry, implemented from scratch in **C** using the **SDL2** library for visualization.
-It renders the **Julia set** : a complex mathematical structure defined by iterative functions over the complex plane.
+It renders the **Julia set**, a complex mathematical structure defined by iterative functions over the complex plane.
 
 The goal of this project was to learn:
 
