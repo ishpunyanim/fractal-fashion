@@ -1,4 +1,4 @@
-# fractal-fashion - Julia Set Renderer in C + SDL2
+# Fractal Fashion - Julia Set Renderer in C + SDL2
 
 ### Overview
 
